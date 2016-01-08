@@ -1,0 +1,33 @@
+doctype html
+html(ng-app='gotApp')
+	head
+		title= title
+		link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel="stylesheet",
+		integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/" +
+		"KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==", crossorigin="anonymous")
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js")
+		script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.min.js")
+		script(src="javascripts/app.js")
+		base(href="/")
+	body
+		header
+			h1 What-I-Got
+			nav.navbar(ng-controller="navCtrl")
+				ul.nav.nav-pills
+					li(ng-hide="user.username")
+						a(href='/login') Login
+					li(ng-show='user.username')
+						a(href='/inventory') {{user.firstName}}'s Inventory
+					li(ng-show='user.username')
+						form.navbar-form.navbar-left
+							.form-group
+								input(type="text" class="form-control" placeholder="New Collection Name")
+								button(type="submit" class="btn btn-default") Add Collection
+					li(ng-show='user.username')
+						a(href='/inventory') Project List
+					li(ng-show='user.username')
+						a(href='/inventory') Shopping List
+					li(ng-show='user.username')
+						a(ng-click='logout()' href='#') Logout
+		block content

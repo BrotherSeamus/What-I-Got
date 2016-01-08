@@ -1,0 +1,42 @@
+body {
+  padding: 30px 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: aliceblue;
+}
+header {
+  background-color: #00B7FF;
+}
+h1 {
+  padding: 5px;
+}
+a {
+  color: #00B7FF;
+  font-size: 18px;
+}
+.navbar {
+  background-color: antiquewhite;
+  border-radius: 0;
+}
+.categories {
+  text-align: center;
+  background-color: aquamarine;
+}
+.item_area {
+  background-color: lavender;
+}
+.item {
+  display: inline-block;
+  background-color: red;
+  width: 200px ;
+  height: 200px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+.p_and_s_list {
+  text-align: center;
+  background-color: burlywood;
+}
+.p_and_s_list ul {
+  list-style: none;
+}
