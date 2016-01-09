@@ -1,11 +1,15 @@
-<div class="container-fluid" ng-controller="inventoryCtrl">
+<div class="container-fluid" ng-controller="inventoryCtrl as inv">
 	<div class="row" role="navigation">
 		<ul class="nav nav-pills">
-			<li><span><a href="/inventory">Collection </a></span><button>X</button></li>
-			<li><span><a href="/inventory">Collection </a></span><button>X</button></li>
-			<li><span><a href="/inventory">Collection </a></span><button>X</button></li>
-			<li><span><a href="/inventory">Collection </a></span><button>X</button></li>
-			<li><span><a href="/inventory">Collection </a></span><button>X</button></li>
+			<li ng-show='user.username'>
+				<form class="navbar-form">
+					<div class="form-group">
+					<input type="text" class="form-control" placeholder="New Collection Name">
+					<button type="submit" class="btn btn-default">Add Collection</button>
+					</div>
+				</form>
+			</li>
+			<li ng-repeat="coll in inv.collections" data-coll-id="{{coll.id}}">{{coll.name}} <button>X</button> </li>
 		</ul>
 	</div>
 	<div class="row">
@@ -16,21 +20,17 @@
 			</form>
 			<h4> Categories</h4>
 			<ul class="nav nav-stacked">
-				<li><span><a>category </a></span><button>X</button></li>
-				<li><span><a>category </a></span><button>X</button></li>
-				<li><span><a>category </a></span><button>X</button></li>
+				<li ng-repeat="cat in inv.categories" data-cat-id="{{cat.id}}">{{cat.name}} <button>X</button> </li>
 			</ul>
 		</div>
 		<div class="col-md-8 item_area">
-				<h3>Item Catalog</h3>
-				<div class="item">Item</div>
-				<div class="item">Item</div>
-				<div class="item">Item</div>
-				<div class="item">Item</div>
-				<div class="item">Item</div>
-				<div class="item">Item</div>
-				<div class="item">Item</div>
-				<div class="item">Item</div>
+			<h3>Item Catalog</h3>
+			<div class="item" ng-repeat="item in inv.items" data-item-id="{{item.id}}">
+				<h4>Name: {{item.name}}</h4>
+				<p>Qty: {{item.qty}}</p>
+				<span>Consumable: </span><input type="checkbox" ng-checked="{{item.consumable}}">
+				<p>Brief Description: {{item.briefDesc}}</p>
+			</div>
 		</div>
 		<div class="col-md-2 p_and_s_list">
 			<div class="row">
