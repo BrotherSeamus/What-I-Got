@@ -9,7 +9,7 @@
 					</div>
 				</form>
 			</li>
-			<li ng-repeat="coll in inv.collections" data-coll-id="{{coll.id}}">{{coll.name}} <button>X</button> </li>
+			<li ng-repeat="coll in collections" data-coll-id="{{coll._id}}" ng-click="getCategories(coll._id)">{{coll.name}} <button>X</button> </li>
 		</ul>
 	</div>
 	<div class="row">
@@ -20,15 +20,15 @@
 			</form>
 			<h4> Categories</h4>
 			<ul class="nav nav-stacked">
-				<li ng-repeat="cat in inv.categories" data-cat-id="{{cat.id}}">{{cat.name}} <button>X</button> </li>
+				<li ng-repeat="cat in categories" data-cat-id="{{cat.id}}">{{cat.name}} <button>X</button> </li>
 			</ul>
 		</div>
 		<div class="col-md-8 item_area">
 			<h3>Item Catalog</h3>
-			<div class="item" ng-repeat="item in inv.items" data-item-id="{{item.id}}">
+			<div class="item" ng-repeat="item in items" data-item-id="{{item.id}}">
 				<h4>Name: {{item.name}}</h4>
 				<p>Qty: {{item.qty}}</p>
-				<span>Consumable: </span><input type="checkbox" ng-checked="{{item.consumable}}">
+				<span>Consumable: </span><input type="checkbox" ng-checked="{{item.consumable}}" disabled>
 				<p>Brief Description: {{item.briefDesc}}</p>
 			</div>
 		</div>

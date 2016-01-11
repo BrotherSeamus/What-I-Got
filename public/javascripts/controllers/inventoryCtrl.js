@@ -1,45 +1,104 @@
-app.controller('inventoryCtrl', ['authService', '$scope', '$location',
-	function (authService, $scope, $location) {
+app.controller('inventoryCtrl', ['authService', '$scope', '$location', '$http',
+	function (authService, $scope, $location, $http) {
 
+		// Pulls in user info for use in scope
 		$scope.user = authService.getUser();
 
-		this.collections = [
-			{
-				name: "Camping Gear",
-				id: 1770
-			},
-			{
-				name: "Photography",
-				id: 1771
-			}
-		];
+		// Array of collection information
+		$scope.collections = [];
 
-		this.categories = [
-			{
-				name: "Tents",
-				id: 2770
-			},
-			{
-				name: "Bags",
-				id: 2771
-			}
-		];
+		// Array of Category information
+		$scope.categories = [];
 
-		this.items = [
-			{
-				name: "Mtn Hardware",
-				qty: 1,
-				consumable: false,
-				briefDesc: "2 man, 3 season tent",
-				compDesc: "This is a pretty great tent"
-			},
-			{
-				name: "Wigwam",
-				qty: 1,
-				consumable: true,
-				briefDesc: "5 man, 3 season tent",
-				compDesc: "This is a pretty great tent"
-			}
-		];
+		// Array of Item information
+		$scope.items = [];
 
+		$http({
+			url: '/inventory/collection/' + $scope.user.id,
+			method: 'get'
+		}).then(function(res) {
+			$scope.collections = res.data;
+		});
+
+/*---------------Collections--------------*/
+		// Get call to server for Collections list
+		$scope.getCollections = function(){
+
+			console.log($scope.user.id);
+
+			$http({
+				url: '/inventory/collection/' + $scope.user.id,
+				method: 'get'
+			}).then(function(res) {
+				$scope.collections = res.data;
+			});
+
+		};
+
+		// Post call to server to create New Collection
+		this.createCollection = function() {
+
+		};
+
+		// Update Collection
+		this.updateCollection = function() {
+
+		};
+
+		// Delete Collection
+		this.deleteCollection = function(){
+
+		};
+
+/*---------------Categories---------------*/
+		// Get call to server for Category list
+		$scope.getCategories = function(collId) {
+
+			console.log('fuck this');
+
+			$http({
+				url: 'inventory/category/' + collId,
+				method: 'get'
+			}).then(function(res) {
+				$scope.categories = res.data;
+				console.log(res.data);
+			})
+
+		};
+
+		// Post call to server to create New Category
+		this.createCategory = function() {
+
+		};
+
+		// Update Category
+		this.updateCategory= function() {
+
+		};
+
+		// Delete Category
+		this.deleteCategory = function(){
+
+		};
+
+/*---------------Items---------------*/
+		// Get call to server for Items list
+		this.getItems = function() {
+
+		};
+
+		// Post call to server to create New Item
+		this.createItem = function() {
+
+		};
+
+		// Update Item
+		this.updateItem = function() {
+
+		};
+
+		// Delete Item
+		this.deleteItem = function(){
+
+		};
 	}]);

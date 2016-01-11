@@ -24,5 +24,4 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider',
 		$httpProvider.interceptors.push('authInterceptor');
 	}]);
 
-app.service('inventoryService');
 
