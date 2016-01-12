@@ -4,28 +4,38 @@
 			<li ng-show='user.username'>
 				<form class="navbar-form">
 					<div class="form-group">
-					<input type="text" class="form-control" placeholder="New Collection Name">
-					<button type="submit" class="btn btn-default">Add Collection</button>
+					<input type="text" class="form-control" placeholder="New Collection Name" ng-model="newCollection">
+					<button class="btn btn-default" ng-click="createCollection()">Add Collection</button>
 					</div>
 				</form>
 			</li>
-			<li ng-repeat="coll in collections" data-coll-id="{{coll._id}}" ng-click="getCategories(coll._id)">{{coll.name}} <button>X</button> </li>
+			<li ng-repeat="coll in collections" ng-click="getCategories(coll._id)">{{coll.name | uppercase}} <button ng-click="deleteCollection(coll._id)">X</button> </li>
 		</ul>
 	</div>
 	<div class="row">
 		<div class="col-md-2 categories">
 			<form class="new_category">
-				<input type="text" name="category" id="category" placeholder="New Category Name">
-				<input type="submit" value="Add Category" id="category_submit">
+				<input type="text" name="category" id="category" placeholder="New Category Name" ng-model="newCategory">
+				<input type="submit" value="Add Category" id="category_submit" ng-click="createCategory()">
 			</form>
 			<h4> Categories</h4>
 			<ul class="nav nav-stacked">
-				<li ng-repeat="cat in categories" data-cat-id="{{cat.id}}">{{cat.name}} <button>X</button> </li>
+				<li ng-repeat="cat in categories" ng-click="getItems(cat._id); $event.stopPropagation()">{{cat.name | uppercase}} <button ng-click="deleteCategory(cat._id)">X</button> </li>
 			</ul>
 		</div>
 		<div class="col-md-8 item_area">
-			<h3>Item Catalog</h3>
-			<div class="item" ng-repeat="item in items" data-item-id="{{item.id}}">
+			<h3>Item Catalog </h3>
+			<h4><button ng-click="toggleNewItem()">New Item</button></h4>
+			<modal title="New Item" visible="showNewItem">
+				<form>
+					<input>
+					<input>
+					<input>
+					<input>
+					<input>
+				</form>
+			</modal>
+			<div class="item" ng-repeat="item in items" data-item-id="{{item._id}}">
 				<h4>Name: {{item.name}}</h4>
 				<p>Qty: {{item.qty}}</p>
 				<span>Consumable: </span><input type="checkbox" ng-checked="{{item.consumable}}" disabled>
