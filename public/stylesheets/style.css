@@ -1,14 +1,16 @@
 body {
   padding: 30px 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: aliceblue;
+  background-color: azure;
 }
-header {
-  background-color: #00B7FF;
-}
+/*header {*/
+  /*background-color: #00B7FF;*/
+/*}*/
+
 h1 {
   padding: 5px;
 }
+
 a {
   color: #00B7FF;
   font-size: 18px;
@@ -17,26 +19,45 @@ a {
   background-color: antiquewhite;
   border-radius: 0;
 }
+
 .categories {
   text-align: center;
-  background-color: aquamarine;
 }
 .item_area {
   background-color: lavender;
 }
 .item {
-  display: inline-block;
-  background-color: red;
+  padding: 5px;
+  display: inline-flex;
+  background-color: aliceblue;
   width: 200px ;
   height: 200px;
-  justify-content: flex-start;
+  /*justify-content: flex-start;*/
   flex-wrap: wrap;
   margin: 10px;
+  text-align: justify;
 }
 .p_and_s_list {
   text-align: center;
-  background-color: burlywood;
 }
 .p_and_s_list ul {
   list-style: none;
+}
+
+.pop {
+  width: 100%;
+}
+
+.itemDelete {
+  height: 25px;
+}
+
+.collTab {
+  padding: 0 10px;
+  margin: 5px 0px;
+  border: 2px solid black;
+}
+
+.labelSpace {
+  margin: 0 10px 0 0;
 }

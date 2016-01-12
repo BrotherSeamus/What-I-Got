@@ -114,8 +114,8 @@ router.post('/item/:id', function(req, res, next) {
 });
 
 /*Update Item information*/
-router.put('/item/:id', function(req, res, next) {
-	var ID = req.params.id;
+router.put('/item/', function(req, res, next) {
+	var ID = req.body._id;
 	Item.findByIdAndUpdate(ID, {
 		name: req.body.name,
 		qty: req.body.qty,

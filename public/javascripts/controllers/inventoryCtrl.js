@@ -21,7 +21,6 @@ app.controller('inventoryCtrl', ['authService', '$scope', '$location', '$http',
 			cDesc: ""
 		};
 
-
 		// Initial call to populate data on user Inventory view
 		$http({
 			url: '/inventory/collection/' + $scope.user.id,
@@ -51,14 +50,30 @@ app.controller('inventoryCtrl', ['authService', '$scope', '$location', '$http',
 
 /*---------------Collections--------------*/
 		// Get call to server for Collections list
-		$scope.getCollections = function(){
+		$scope.getCollections = function() {
 
 			$http({
 				url: '/inventory/collection/' + $scope.user.id,
 				method: 'get'
-			}).then(function(res) {
+			}).then(function (res) {
 				$scope.collections = res.data;
-			})
+			}).then(function () {
+				$http({
+					url: 'inventory/category/' + $scope.collections[0]._id,
+					method: 'get'
+				}).then(function (res) {
+					$scope.categories = res.data;
+					$scope.currentCollection = $scope.collections[0]._id
+				}).then(function () {
+					$http({
+						url: 'inventory/item/' + $scope.categories[0]._id,
+						method: 'get'
+					}).then(function (res) {
+						$scope.items = res.data;
+						$scope.currentCategory = $scope.categories[0]._id
+					})
+				})
+			});
 		};
 
 		// Post call to server to create New Collection
@@ -170,8 +185,6 @@ app.controller('inventoryCtrl', ['authService', '$scope', '$location', '$http',
 		// Post call to server to create New Item
 		$scope.createItem = function() {
 
-			console.log($scope.currentCategory);
-
 			$http({
 				url: '/inventory/item/' + $scope.currentCategory,
 				method: 'post',
@@ -182,8 +195,6 @@ app.controller('inventoryCtrl', ['authService', '$scope', '$location', '$http',
 				$scope.getItems($scope.currentCategory)
 			});
 
-
-
 			$scope.newItem= {
 				name: "",
 				qty: 1,
@@ -191,19 +202,20 @@ app.controller('inventoryCtrl', ['authService', '$scope', '$location', '$http',
 				bDesc: "",
 				cDesc: ""
 			};
-
-			console.log($scope.newItem);
-
-
-		};
-
-		// Update Item
-		$scope.updateItem = function() {
-
 		};
 
 		// Delete Item
-		$scope.deleteItem = function(){
+		$scope.deleteItem = function(itemId){
+
+			if(confirm('This Item will be deleted' +
+							'\n\nDo you wish to continue?')) {
+				$http({
+					url: 'inventory/item/' + itemId,
+					method: 'delete'
+				}).then(function() {
+					$scope.getItems($scope.currentCategory);
+				})
+			}
 
 		};
 	}]);

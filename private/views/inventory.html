@@ -9,7 +9,8 @@
 					</div>
 				</form>
 			</li>
-			<li ng-repeat="coll in collections" ng-click="getCategories(coll._id)">{{coll.name | uppercase}} <button ng-click="deleteCollection(coll._id)">X</button> </li>
+			<li ng-repeat="coll in collections" ng-click="getCategories(coll._id)" class="collTab">{{coll.name | uppercase}}
+				<span ng-click="deleteCollection(coll._id)">&times</span> </li>
 		</ul>
 	</div>
 	<div class="row">
@@ -21,7 +22,7 @@
 			<h4> Categories</h4>
 			<ul class="nav nav-stacked">
 				<li ng-repeat="cat in categories" ng-click="getItems(cat._id); $event.stopPropagation()">
-					{{cat.name | uppercase}} <button ng-click="deleteCategory(cat._id)">X</button> </li>
+					{{cat.name | uppercase}} <button ng-click="deleteCategory(cat._id)">&times</button> </li>
 			</ul>
 		</div>
 		<div class="col-md-8 item_area">
@@ -29,13 +30,12 @@
 
 
 			<div ng-controller="NewItemModalCtrl" class="container">
-				<button ng-click="toggleModal()" class="btn btn-default">New Item</button>
-
-				<modal title="New Item" visible="showModal">
+				<button ng-click="toggleNewItem()" class="btn btn-default">New Item</button>
+				<modal title="New Item" visible="showNewItem">
 					<form role="form" id="newItemForm">
 						<div class="form-group">
 							<label for="itemName">Item Name {{newItem.name}}</label>
-							<input type="text" class="form-control" name="name" id="itemName" ng-model="newItem.name"/>
+							<input type="text" class="form-control" name="name" id="itemName" ng-model="newItem.name" maxlength="10"/>
 						</div>
 						<div class="form-group">
 							<label for="itemQty">Item Quantity</label>
@@ -44,7 +44,7 @@
 							<label for="consumable">Is this item consumable?</label>
 							<input type="checkbox" class="form-control" name="consumable" id="consumable" ng-model="newItem.consumable"/>
 
-							<label for="bDesc">Brief Description</label>
+							<label for="bDesc">Brief Description (30 character limit)</label>
 							<input type="text" class="form-control" name="bDesc" id="bDesc" maxlength="30" ng-model="newItem.bDesc"/>
 
 							<label for="cDesc">Complete Description</label>
@@ -57,11 +57,43 @@
 
 
 			<div class="item" ng-repeat="item in items" data-item-id="{{item._id}}">
-				<h4>Name: {{item.name}}</h4>
-				<p>Qty: {{item.qty}}</p>
-				<span>Consumable: </span><input type="checkbox" ng-checked="{{item.consumable}}" disabled>
-				<p>Brief Description: {{item.briefDesc}}</p>
+				<h4 class="pop" ng-click="toggleItem()">Name: {{item.name}}</h4>
+				<p class="pop">Qty: {{item.qty}}</p>
+				<label for="consume" class="labelSpace">Item consumable?</label>
+				<input id="consume" type="checkbox" ng-checked="{{item.consumable}}" disabled>
+				<p class="pop">Brief Description: {{item.briefDesc}}</p>
+				<button class="itemDelete" ng-click="deleteItem(item._id)">Delete</button>
+
+
+
+			<div ng-controller="ViewItemModalCtrl" class="container">
+				<button ng-click="toggleItem(item)">Edit Item</button>
+				<modal title="Item Review" visible="showItem">
+					<form role="form" id="viewItemForm">
+						<div class="form-group">
+							<label for="name">Item Name {{newItem.name}}</label>
+							<input type="text" class="form-control" name="name" id="name" ng-model="viewItem.name" maxlength="10"/>
+						</div>
+						<div class="form-group">
+							<label for="qty">Item Quantity</label>
+							<input type="number" class="form-control" name="qty" id="qty" min="1" ng-model="viewItem.qty"/>
+
+							<label for="consumption">Is this item consumable?  </label>
+							<input type="checkbox" class="form-control" name="consumable" id="consumption" ng-model="viewItem.consumable"/>
+
+							<label for="briefDesc">Brief Description (30 character limit)</label>
+							<input type="text" class="form-control" name="bDesc" id="briefDesc" maxlength="30" ng-model="viewItem.briefDesc"/>
+
+							<label for="compDesc">Complete Description</label>
+							<textarea form="newItemForm" class="form-control" name="cDesc" id="compDesc" ng-model="viewItem.compDesc"></textarea>
+						</div>
+						<button ng-click="updateItem(item._id)" class="btn btn-default">Submit</button>
+					</form>
+				</modal>
 			</div>
+			</div>
+
+
 		</div>
 		<div class="col-md-2 p_and_s_list">
 			<div class="row">
