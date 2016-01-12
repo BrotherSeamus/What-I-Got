@@ -13,6 +13,16 @@ app.controller('inventoryCtrl', ['authService', '$scope', '$location', '$http',
 		// Array of Item information
 		$scope.items = [];
 
+		$scope.newItem= {
+			name: "",
+			qty: 1,
+			consumable: false,
+			bDesc: "",
+			cDesc: ""
+		};
+
+
+		// Initial call to populate data on user Inventory view
 		$http({
 			url: '/inventory/collection/' + $scope.user.id,
 			method: 'get'
@@ -35,6 +45,9 @@ app.controller('inventoryCtrl', ['authService', '$scope', '$location', '$http',
 				})
 			})
 		});
+
+
+
 
 /*---------------Collections--------------*/
 		// Get call to server for Collections list
@@ -96,6 +109,7 @@ app.controller('inventoryCtrl', ['authService', '$scope', '$location', '$http',
 			}).then(function() {
 				if($scope.categories[0] != undefined) {
 					$scope.getItems($scope.categories[0]._id);
+					$scope.currentCategory = $scope.categories[0]._id;
 				}else{
 					$scope.items = [];
 				}
@@ -155,6 +169,31 @@ app.controller('inventoryCtrl', ['authService', '$scope', '$location', '$http',
 
 		// Post call to server to create New Item
 		$scope.createItem = function() {
+
+			console.log($scope.currentCategory);
+
+			$http({
+				url: '/inventory/item/' + $scope.currentCategory,
+				method: 'post',
+				data: $scope.newItem
+			}).then(function(res) {
+				console.log(res);
+				console.log($scope.newItem);
+				$scope.getItems($scope.currentCategory)
+			});
+
+
+
+			$scope.newItem= {
+				name: "",
+				qty: 1,
+				consumable: false,
+				bDesc: "",
+				cDesc: ""
+			};
+
+			console.log($scope.newItem);
+
 
 		};
 

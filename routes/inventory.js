@@ -102,8 +102,8 @@ router.post('/item/:id', function(req, res, next) {
 		name: req.body.name,
 		qty: req.body.qty,
 		consumable: req.body.consumable,
-		briefDesc: req.body.briefDesc,
-		compDesc: req.body.compDesc,
+		briefDesc: req.body.bDesc,
+		compDesc: req.body.cDesc,
 		categoryID: req.params.id
 	};
 
