@@ -48,7 +48,8 @@ a {
   width: 100%;
 }
 
-.itemDelete {
+.itemBtn {
+  display: inline-block;
   height: 25px;
 }
 
@@ -61,3 +62,4 @@ a {
 .labelSpace {
   margin: 0 10px 0 0;
 }
+

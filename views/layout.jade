@@ -17,11 +17,12 @@ html(ng-app='gotApp')
 	body
 		header
 			h1 What-I-Got
+				small A personal inventory system
 			nav.navbar(ng-controller="navCtrl")
 				ul.nav.nav-pills
 					li(ng-hide="user.username")
 						a(href='/login') Login
-					li(ng-show='user.username')
+					li.navbar-right(ng-show='user.username')
 						a(ng-click='logout()' href='#') Logout
 		block content
 		script(src="javascripts/controllers/registerCtrl.js")
@@ -31,7 +32,4 @@ html(ng-app='gotApp')
 		script(src="javascripts/controllers/newItemModalCtrl.js")
 		script(src="javascripts/controllers/viewItemModalCtrl.js")
 		script(src="javascripts/services/authService.js")
-		script(src="javascripts/services/collectionService.js")
-		script(src="javascripts/services/categoryService.js")
-		script(src="javascripts/services/itemService.js")
 		script(src="javascripts/directives/modalDirective.js")

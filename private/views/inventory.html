@@ -1,16 +1,21 @@
 <div class="container-fluid" ng-controller="inventoryCtrl as inv">
+	<h2>Collections</h2>
 	<div class="row" role="navigation">
 		<ul class="nav nav-pills">
-			<li ng-show='user.username'>
-				<form class="navbar-form">
+			<li ng-repeat="coll in collections" ng-click="getCategories(coll._id)"><span class="collTab">
+				{{coll.name | uppercase}}</span><button ng-click="deleteCollection(coll._id)">&times</button> </li>
+			<li ng-show='user.username' class="dropdown, navbar-right">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+				   aria-expanded="false">
+					Add New Collection <span class="caret"></span>
+				</a>
+				<form class="dropdown-menu">
 					<div class="form-group">
-					<input type="text" class="form-control" placeholder="New Collection Name" ng-model="newCollection">
-					<button class="btn btn-default" ng-click="createCollection()">Add Collection</button>
+						<input type="text" class="form-control" placeholder="New Collection Name" ng-model="newCollection">
+						<button class="btn btn-default" ng-click="createCollection()">Add Collection</button>
 					</div>
 				</form>
 			</li>
-			<li ng-repeat="coll in collections" ng-click="getCategories(coll._id)" class="collTab">{{coll.name | uppercase}}
-				<span ng-click="deleteCollection(coll._id)">&times</span> </li>
 		</ul>
 	</div>
 	<div class="row">
@@ -62,12 +67,12 @@
 				<label for="consume" class="labelSpace">Item consumable?</label>
 				<input id="consume" type="checkbox" ng-checked="{{item.consumable}}" disabled>
 				<p class="pop">Brief Description: {{item.briefDesc}}</p>
-				<button class="itemDelete" ng-click="deleteItem(item._id)">Delete</button>
+				<button class="itemBtn" ng-click="deleteItem(item._id)">Delete</button>
 
 
 
 			<div ng-controller="ViewItemModalCtrl" class="container">
-				<button ng-click="toggleItem(item)">Edit Item</button>
+				<button ng-click="toggleItem(item)" class="itemBtn">Edit</button>
 				<modal title="Item Review" visible="showItem">
 					<form role="form" id="viewItemForm">
 						<div class="form-group">
@@ -91,30 +96,27 @@
 					</form>
 				</modal>
 			</div>
+
+
+				<button class="itemBtn" ng-click="addToShoppingList(item.name)">Shopping</button>
+				<button class="itemBtn" ng-click="addToProjectList(item.name)">Project</button>
 			</div>
 
 
 		</div>
 		<div class="col-md-2 p_and_s_list">
 			<div class="row">
-				<h4><a>Project List</a></h4>
+				<h4>Project List</h4>
 				<ul>
-					<li>Item</li>
-					<li>Item</li>
-					<li>Item</li>
-					<li>Item</li>
-					<li>Item</li>
-					<li>Item</li>
+					<li ng-repeat="item in projectList"><span>{{item.name | uppercase}}</span>
+						<button ng-click="deleteFromProjectList(item._id)">&times</button></li>
 				</ul>
 			</div>
 			<div class="row">
-				<h4><a>Shopping List</a></h4>
+				<h4>Shopping List</h4>
 				<ul>
-					<li>Item</li>
-					<li>Item</li>
-					<li>Item</li>
-					<li>Item</li>
-					<li>Item</li>
+					<li ng-repeat="item in shoppingList"><span>{{item.name | uppercase}}</span>
+						<button ng-click="deleteFromShoppingList(item._id)">&times</button></li>
 				</ul>
 			</div>
 		</div>

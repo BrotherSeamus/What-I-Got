@@ -12,6 +12,7 @@ var register = require('./routes/register');
 var login = require('./routes/login');
 var inventory = require('./routes/inventory');
 var catchAll =  require('./routes/catchall');
+var lists = require('./routes/lists');
 
 var app = express();
 
@@ -58,6 +59,7 @@ app.use('/private/*', expressJwt({secret: 'process.env.SECRET'}));
 app.use('/private', express.static(path.join(__dirname, 'private')));
 
 app.use('/', routes);
+app.use('/lists', lists);
 app.use('/inventory', inventory);
 app.use('/api/register', register);
 app.use('/api/login', login);
