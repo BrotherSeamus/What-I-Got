@@ -1,17 +1,17 @@
 <div class="container-fluid" ng-controller="inventoryCtrl as inv">
-	<h2>Collections</h2>
-	<div class="row" role="navigation">
+	<h2 class="collHeader">Collections</h2>
+	<div class="row collBar" role="navigation">
 		<ul class="nav nav-pills">
-			<li ng-repeat="coll in collections" ng-click="getCategories(coll._id)"><span class="collTab">
-				{{coll.name | uppercase}}</span><button ng-click="deleteCollection(coll._id)">&times</button> </li>
+			<li ng-repeat="coll in collections" ng-click="getCategories(coll._id)" class="collTab"><span>
+				{{coll.name | uppercase}} </span><span class="glyphicon glyphicon-remove-circle" ng-click="deleteCollection(coll._id)"></span> </li>
 			<li ng-show='user.username' class="dropdown, navbar-right">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+				<h3 class="dropdown-toggle addColl" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
 				   aria-expanded="false">
 					Add New Collection <span class="caret"></span>
-				</a>
+				</h3>
 				<form class="dropdown-menu">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="New Collection Name" ng-model="newCollection">
+						<input type="text" class="form-control" placeholder="New Collection Name" ng-model="newCollection" required>
 						<button class="btn btn-default" ng-click="createCollection()">Add Collection</button>
 					</div>
 				</form>
@@ -21,13 +21,15 @@
 	<div class="row">
 		<div class="col-md-2 categories">
 			<form class="new_category">
-				<input type="text" name="category" id="category" placeholder="New Category Name" ng-model="newCategory">
-				<input type="submit" value="Add Category" id="category_submit" ng-click="createCategory()">
+				<input type="text" name="category" id="category" class="form-control" placeholder="New Category Name"
+				       ng-model="newCategory" required>
+				<input type="submit" class="btn btn-default" value="Add Category" id="category_submit" ng-click="createCategory()">
 			</form>
 			<h4> Categories</h4>
 			<ul class="nav nav-stacked">
 				<li ng-repeat="cat in categories" ng-click="getItems(cat._id); $event.stopPropagation()">
-					{{cat.name | uppercase}} <button ng-click="deleteCategory(cat._id)">&times</button> </li>
+					{{cat.name | uppercase}} <span ng-click="deleteCategory(cat._id)" class="glyphicon glyphicon-remove-circle">
+				</span> </li>
 			</ul>
 		</div>
 		<div class="col-md-8 item_area">
@@ -39,8 +41,8 @@
 				<modal title="New Item" visible="showNewItem">
 					<form role="form" id="newItemForm">
 						<div class="form-group">
-							<label for="itemName">Item Name {{newItem.name}}</label>
-							<input type="text" class="form-control" name="name" id="itemName" ng-model="newItem.name" maxlength="10"/>
+							<label for="itemName">Item Name</label>
+							<input type="text" class="form-control" name="name" id="itemName" ng-model="newItem.name" maxlength="20"/>
 						</div>
 						<div class="form-group">
 							<label for="itemQty">Item Quantity</label>
@@ -55,29 +57,28 @@
 							<label for="cDesc">Complete Description</label>
 							<textarea form="newItemForm" class="form-control" name="cDesc" id="cDesc" ng-model="newItem.cDesc"></textarea>
 						</div>
-						<button ng-click="createItem()" class="btn btn-default">Submit</button>
+						<button ng-click="createItem(); toggleNewItem()" class="btn btn-default">Submit</button>
 					</form>
 				</modal>
 			</div>
 
 
 			<div class="item" ng-repeat="item in items" data-item-id="{{item._id}}">
-				<h4 class="pop" ng-click="toggleItem()">Name: {{item.name}}</h4>
+				<span class="glyphicon glyphicon-remove-circle" ng-click="deleteItem(item._id)"></span>
+				<h4 class="pop" ng-click="toggleItem()">{{item.name}}</h4>
 				<p class="pop">Qty: {{item.qty}}</p>
 				<label for="consume" class="labelSpace">Item consumable?</label>
 				<input id="consume" type="checkbox" ng-checked="{{item.consumable}}" disabled>
 				<p class="pop">Brief Description: {{item.briefDesc}}</p>
-				<button class="itemBtn" ng-click="deleteItem(item._id)">Delete</button>
-
 
 
 			<div ng-controller="ViewItemModalCtrl" class="container">
-				<button ng-click="toggleItem(item)" class="itemBtn">Edit</button>
+				<button ng-click="toggleItem(item)" class="itemBtn btn btn-default">Edit</button>
 				<modal title="Item Review" visible="showItem">
-					<form role="form" id="viewItemForm">
+					<form role="form" id="viewItemForm" class="item_form">
 						<div class="form-group">
 							<label for="name">Item Name {{newItem.name}}</label>
-							<input type="text" class="form-control" name="name" id="name" ng-model="viewItem.name" maxlength="10"/>
+							<input type="text" class="form-control" name="name" id="name" ng-model="viewItem.name" maxlength="20"/>
 						</div>
 						<div class="form-group">
 							<label for="qty">Item Quantity</label>
@@ -92,14 +93,14 @@
 							<label for="compDesc">Complete Description</label>
 							<textarea form="newItemForm" class="form-control" name="cDesc" id="compDesc" ng-model="viewItem.compDesc"></textarea>
 						</div>
-						<button ng-click="updateItem(item._id)" class="btn btn-default">Submit</button>
+						<button ng-click="updateItem(); closeItem()" class="btn btn-default">Submit</button>
 					</form>
 				</modal>
 			</div>
 
 
-				<button class="itemBtn" ng-click="addToShoppingList(item.name)">Shopping</button>
-				<button class="itemBtn" ng-click="addToProjectList(item.name)">Project</button>
+				<button class="itemBtn btn btn-default" ng-click="addToShoppingList(item.name)">Shopping</button>
+				<button class="itemBtn btn btn-default" ng-click="addToProjectList(item.name)">Project</button>
 			</div>
 
 
@@ -109,14 +110,14 @@
 				<h4>Project List</h4>
 				<ul>
 					<li ng-repeat="item in projectList"><span>{{item.name | uppercase}}</span>
-						<button ng-click="deleteFromProjectList(item._id)">&times</button></li>
+						<span ng-click="deleteFromProjectList(item._id)" class="glyphicon glyphicon-remove-circle"></span></li>
 				</ul>
 			</div>
 			<div class="row">
 				<h4>Shopping List</h4>
 				<ul>
 					<li ng-repeat="item in shoppingList"><span>{{item.name | uppercase}}</span>
-						<button ng-click="deleteFromShoppingList(item._id)">&times</button></li>
+						<span ng-click="deleteFromShoppingList(item._id)" class="glyphicon glyphicon-remove-circle"></span></li>
 				</ul>
 			</div>
 		</div>

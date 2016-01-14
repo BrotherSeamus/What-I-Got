@@ -21,10 +21,12 @@ router.post('/collection/:id', function(req, res, next) {
 		userID: req.params.id
 	};
 
-	Collection.create(newCollection, function(err, data){
-		if(err) throw err;
-		res.send(data);
-	});
+	if(newCollection.name != undefined) {
+		Collection.create(newCollection, function (err, data) {
+			res.send(data);
+		});
+	}
+
 });
 
 /*Update Collection Name*/
@@ -62,10 +64,13 @@ router.post('/category/:id', function(req, res, next) {
 		collectionID: req.params.id
 	};
 
-	Category.create(newCategory, function(err, data){
-		if(err) throw err;
-		res.send(data);
-	});
+	console.log(newCategory.name);
+
+	if(newCategory.name != undefined) {
+		Category.create(newCategory, function (err, data) {
+			res.send(data);
+		});
+	}
 });
 
 /*Update Category Name*/

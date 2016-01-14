@@ -1,44 +1,44 @@
 body {
   padding: 30px 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: azure;
+  background-image: url("../images/crossword.png");
 }
-/*header {*/
-  /*background-color: #00B7FF;*/
-/*}*/
 
 h1 {
   padding: 5px;
 }
 
-a {
-  color: #00B7FF;
-  font-size: 18px;
-}
-.navbar {
-  background-color: antiquewhite;
-  border-radius: 0;
+.categories {
+  text-align: right;
+  padding-right: 15px;
 }
 
-.categories {
-  text-align: center;
-}
 .item_area {
   background-color: lavender;
+  background-image: url("../images/green_cup.png");
+  border-left: 2px solid black;
+  border-right: 2px solid black;
 }
+
+.modal-body {
+  background-color: #d9e6f2;
+}
+
 .item {
   padding: 5px;
   display: inline-flex;
   background-color: aliceblue;
-  width: 200px ;
-  height: 200px;
-  /*justify-content: flex-start;*/
+  background-image: url("../images/squared_metal.png");
+  width: 227px ;
+  height: 232px;
   flex-wrap: wrap;
   margin: 10px;
-  text-align: justify;
+  text-align: left;
+  border-radius: 5%;
 }
 .p_and_s_list {
-  text-align: center;
+  text-align: right;
+  padding-right: 30px;
 }
 .p_and_s_list ul {
   list-style: none;
@@ -50,16 +50,32 @@ a {
 
 .itemBtn {
   display: inline-block;
-  height: 25px;
+  height: 30px;
+}
+
+.collBar {
+  border-bottom: 3px solid black;
+}
+
+.addColl {
+  margin-top: 0;
+}
+
+.collHeader {
+  margin-top: -52px;
 }
 
 .collTab {
   padding: 0 10px;
   margin: 5px 0px;
-  border: 2px solid black;
+  border: 2px solid #9494b8;
+  border-radius: 10%;
 }
 
 .labelSpace {
   margin: 0 10px 0 0;
 }
 
+.glyphicon:hover {
+  background-color: #d9e6f2;
+}

@@ -169,8 +169,6 @@ app.controller('inventoryCtrl', ['authService', '$scope', '$location', '$http',
 				method: 'post',
 				data: $scope.newItem
 			}).then(function(res) {
-				console.log(res);
-				console.log($scope.newItem);
 				$scope.getItems($scope.currentCategory)
 			});
 
@@ -208,7 +206,6 @@ $scope.getProjectList = function() {
 		method: 'get'
 	}).then(function(res) {
 		$scope.projectList = res.data;
-		console.log($scope.projectList);
 	})
 
 
