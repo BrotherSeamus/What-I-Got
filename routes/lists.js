@@ -20,10 +20,16 @@ router.post('/project/:id', function(req, res, next) {
 		userID: req.params.id
 	};
 
-	ProjectList.create(newProjectList, function(err, data){
-		if(err) throw err;
-		res.send(data);
-	});
+	ProjectList.find({name: req.body.name}, function(err, data) {
+		if (data.length > 0) {
+			res.send(500);
+		} else {
+			ProjectList.create(newProjectList, function (err, data) {
+				if (err) throw err;
+				res.send(data);
+			});
+		}
+	})
 });
 
 /* DELETE Project List Item*/
@@ -51,9 +57,15 @@ router.post('/shopping/:id', function(req, res, next) {
 		userID: req.params.id
 	};
 
-	ShoppingList.create(newShoppingList, function(err, data){
-		if(err) throw err;
-		res.send(data);
+	ShoppingList.find({name: req.body.name}, function(err, data) {
+		if(data.length > 0){
+			res.send(500)
+		}else{
+			ShoppingList.create(newShoppingList, function(err, data){
+				if(err) throw err;
+				res.send(data);
+			});
+		}
 	});
 });
 

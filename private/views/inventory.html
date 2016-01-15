@@ -1,10 +1,12 @@
 <div class="container-fluid" ng-controller="inventoryCtrl as inv">
 	<h2 class="collHeader">Collections</h2>
+
 	<div class="row collBar" role="navigation">
-		<ul class="nav nav-pills">
-			<li ng-repeat="coll in collections" ng-click="getCategories(coll._id)" class="collTab"><span>
-				{{coll.name | uppercase}} </span><span class="glyphicon glyphicon-remove-circle" ng-click="deleteCollection(coll._id)"></span> </li>
-			<li ng-show='user.username' class="dropdown, navbar-right">
+		<ul class="nav nav-tabs dropup">
+			<li ng-repeat="coll in collections" ng-click="getCategories(coll._id)" class="collTab"
+			    ng-class="{highlightedColl: coll._id == currentCollection}">{{coll.name | uppercase}}
+				<span class="glyphicon glyphicon-remove-circle" ng-click="deleteCollection(coll._id)"></span> </li>
+			<li ng-show='user.username' class="dropdown navbar-right" role="presentation">
 				<h3 class="dropdown-toggle addColl" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
 				   aria-expanded="false">
 					Add New Collection <span class="caret"></span>
@@ -18,22 +20,30 @@
 			</li>
 		</ul>
 	</div>
+
 	<div class="row">
 		<div class="col-md-2 categories">
-			<form class="new_category">
-				<input type="text" name="category" id="category" class="form-control" placeholder="New Category Name"
-				       ng-model="newCategory">
-				<input type="submit" class="btn btn-default" value="Add Category" id="category_submit" ng-click="createCategory()">
-			</form>
 			<h4> Categories</h4>
-			<ul class="nav nav-stacked">
-				<li ng-repeat="cat in categories" ng-click="getItems(cat._id); $event.stopPropagation()">
+			<div class="dropup">
+				<h5 class="dropdown-toggle addColl" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+				    aria-expanded="false">Add New Category<span class="caret"></span></h5>
+				<form class="new_category dropdown-menu">
+					<input type="text" name="category" id="category" class="form-control" placeholder="New Category Name"
+					       ng-model="newCategory">
+					<input type="submit" class="btn btn-default" value="Add Category" id="category_submit" ng-click="createCategory()">
+				</form>
+			</div>
+			<ul class="nav">
+				<li ng-repeat="cat in categories" ng-click="getItems(cat._id); $event.stopPropagation()" class="catTab"
+				    ng-class="{highlightedCat: cat._id == currentCategory}">
 					{{cat.name | uppercase}} <span ng-click="deleteCategory(cat._id)" class="glyphicon glyphicon-remove-circle">
 				</span> </li>
 			</ul>
 		</div>
+
+
 		<div class="col-md-8 item_area">
-			<h3>Item Catalog </h3>
+			<h3 class="item-header">Item Catalog </h3>
 
 
 			<div ng-controller="NewItemModalCtrl" class="container">
