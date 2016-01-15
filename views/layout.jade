@@ -2,6 +2,8 @@ doctype html
 html(ng-app='gotApp')
 	head
 		title= title
+		link(href='https://fonts.googleapis.com/css?family=Indie+Flower' rel="stylesheet" type="text/css")
+		link(href='https://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css')
 		link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel="stylesheet",
 		integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/" +
 		"KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==", crossorigin="anonymous")
@@ -17,7 +19,7 @@ html(ng-app='gotApp')
 	body
 		header
 			h1 What-I-Got
-				small A personal inventory system
+				span.inset A personal inventory system
 			nav.navbar(ng-controller="navCtrl")
 				ul.nav.nav-pills
 					li(ng-hide="user.username")
