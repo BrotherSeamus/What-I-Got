@@ -43,6 +43,7 @@ h1 {
   margin: 10px;
   text-align: left;
   border-radius: 5%;
+  position: relative;
 }
 
 .modal-body {
@@ -95,8 +96,18 @@ h1 {
   margin: 0 10px 0 0;
 }
 
+.glyphicon {
+  padding-left: 10px;
+}
+
+.rawr {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
 .glyphicon:hover {
-  background-color: #d9e6f2;
+  color: red;
 }
 
 .catTab {

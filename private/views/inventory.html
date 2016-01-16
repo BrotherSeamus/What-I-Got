@@ -36,7 +36,7 @@
 			<ul class="nav">
 				<li ng-repeat="cat in categories" ng-click="getItems(cat._id); $event.stopPropagation()" class="catTab"
 				    ng-class="{highlightedCat: cat._id == currentCategory}">
-					{{cat.name | uppercase}} <span ng-click="deleteCategory(cat._id)" class="glyphicon glyphicon-remove-circle">
+					{{cat.name | uppercase}}<span ng-click="deleteCategory(cat._id)" class="glyphicon glyphicon-remove-circle">
 				</span> </li>
 			</ul>
 		</div>
@@ -73,8 +73,8 @@
 			</div>
 
 
-			<div class="item" ng-repeat="item in items" data-item-id="{{item._id}}">
-				<span class="glyphicon glyphicon-remove-circle" ng-click="deleteItem(item._id)"></span>
+			<div class="item container" ng-repeat="item in items" data-item-id="{{item._id}}">
+				<span class="glyphicon glyphicon-remove-circle rawr" ng-click="deleteItem(item._id)"></span>
 				<h4 class="pop" ng-click="toggleItem()">{{item.name}}</h4>
 				<p class="pop">Qty: {{item.qty}}</p>
 				<label for="consume" class="labelSpace">Item consumable?</label>
@@ -109,8 +109,8 @@
 			</div>
 
 
-				<button class="itemBtn btn btn-default" ng-click="addToShoppingList(item.name)">Shopping</button>
-				<button class="itemBtn btn btn-default" ng-click="addToProjectList(item.name)">Project</button>
+				<button class="btn btn-default itemBtn" ng-click="addToShoppingList(item.name)">Shopping</button>
+				<button class="btn btn-default itemBtn" ng-click="addToProjectList(item.name)">Project</button>
 			</div>
 
 
