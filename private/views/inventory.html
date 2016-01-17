@@ -13,7 +13,7 @@
 				</h3>
 				<form class="dropdown-menu">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="New Collection Name" ng-model="newCollection" required>
+						<input type="text" class="form-control" placeholder="New Collection Name" ng-model="newCollection">
 						<button class="btn btn-default" ng-click="createCollection()">Add Collection</button>
 					</div>
 				</form>
@@ -65,7 +65,7 @@
 							<input type="text" class="form-control" name="bDesc" id="bDesc" maxlength="30" ng-model="newItem.bDesc"/>
 
 							<label for="cDesc">Complete Description</label>
-							<textarea form="newItemForm" class="form-control" name="cDesc" id="cDesc" ng-model="newItem.cDesc"></textarea>
+							<textarea form="newItemForm" resize="vertical" class="form-control" name="cDesc" id="cDesc" ng-model="newItem.cDesc"></textarea>
 						</div>
 						<button ng-click="createItem(); toggleNewItem()" class="btn btn-default">Submit</button>
 					</form>
@@ -101,7 +101,7 @@
 							<input type="text" class="form-control" name="bDesc" id="briefDesc" maxlength="30" ng-model="viewItem.briefDesc"/>
 
 							<label for="compDesc">Complete Description</label>
-							<textarea form="newItemForm" class="form-control" name="cDesc" id="compDesc" ng-model="viewItem.compDesc"></textarea>
+							<textarea form="newItemForm" resize="vertical" class="form-control" name="cDesc" id="compDesc" ng-model="viewItem.compDesc"></textarea>
 						</div>
 						<button ng-click="updateItem(); closeItem()" class="btn btn-default">Submit</button>
 					</form>

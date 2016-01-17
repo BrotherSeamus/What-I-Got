@@ -1,21 +1,37 @@
-<form ng-submit="submit()" name="myForm">
-	<label for="username">Username:</label>
-	<input type="text" name="username" ng-model="form.username" id="username" required
-	       ng-pattern="/^[a-zA-Z0-9_]*$/" placeholder="Username">
-	<span class="error" ng-show="myForm.username.$error.required">This is required!</span>
-	<span class="error" ng-show="myForm.username.$error.pattern">Alphanumeric, underscores and periods only!</span>
+<div class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<form ng-submit="submit()" name="myForm">
+			<label for="username">Username:</label>
+			<span class="error" ng-show="myForm.username.$error.required">This is required!</span>
+			<span class="error" ng-show="myForm.username.$error.pattern">Alphanumeric and underscores only!</span>
+			<input type="text" name="username" ng-model="form.username" id="username" required
+			       ng-pattern="/^[a-zA-Z0-9_]*$/" placeholder="Username" class="form-control">
 
-	<label for="firstName">First Name:</label>
-	<input type="text" name="firstName" ng-model="form.firstName" id="firstName" placeholder="First Name">
+			<label for="firstName">First Name:</label>
+			<span class="error" ng-show="myForm.firstName.$error.required">This is required!</span>
+			<span class="error" ng-show="myForm.firstName.$error.pattern">Alphabetic characters only!</span>
+			<input type="text" name="firstName" ng-model="form.firstName" id="firstName" placeholder="First Name"
+			       class="form-control" ng-pattern="/^[a-zA-Z]*$/" required>
 
-	<label for="lastName">Last Name:</label>
-	<input type="text" name="lastName" ng-model="form.lastName" id="lastName" placeholder="Last Name">
+			<label for="lastName">Last Name:</label>
+			<span class="error" ng-show="myForm.lastName.$error.required">This is required!</span>
+			<span class="error" ng-show="myForm.lastName.$error.pattern">Alphabetic and underscores only!</span>
+			<input type="text" name="lastName" ng-model="form.lastName" id="lastName" placeholder="Last Name"
+			       class="form-control" ng-pattern="/^[a-zA-Z_]*$/" required>
 
-	<label for="password">Password:</label>
-	<input type="password" name="password" ng-model="form.password" id="password" placeholder="Password">
+			<label for="password">Password:</label>
+			<span class="error" ng-show="myForm.password.$error.required">This is required!</span>
+			<input type="password" name="password" ng-model="form.password" id="password" placeholder="Password"
+			       class="form-control" required>
 
-	<label for="confirm">Confirm Password:</label>
-	<input type="password" name="confirm" ng-model="form.confirm" id="confirm" placeholder="Confirm Password">
+			<label for="confirm">Confirm Password:</label>
+			<span class="error" ng-show="myForm.confirm.$error.required">This is required!</span>
+			<input type="password" name="confirm" ng-model="form.confirm" id="confirm" placeholder="Confirm Password"
+			       class="form-control" required>
 
-	<input type="submit" value="Submit">
-</form>
+			<input type="submit" value="Submit">
+		</form>
+	</div>
+	<div col-md-4></div>
+</div>

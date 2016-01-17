@@ -9,6 +9,11 @@ h1 {
   font-size: 54px;
   padding: 5px;
   font-family: 'Indie Flower', cursive;
+  color: #9AA189;
+}
+
+h4 {
+  font-weight: bold;
 }
 
 .inset {
@@ -47,7 +52,7 @@ h1 {
 }
 
 .modal-body {
-  background-color: #eeeedd;
+  background-color: #ffeecc;
 }
 
 .p_and_s_list {
